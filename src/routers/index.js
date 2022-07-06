@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const userRouter = require('./user.router');
-const { checkToken } = require('../middlewares/token.mw');
+const { checkAccessToken } = require('../middlewares/token.mw');
 
 router.use('/users', userRouter);
-router.get('/test', checkToken, (req, res, next) => {
+router.get('/test', checkAccessToken, (req, res, next) => {
   res.send({ message: 'authorized users only route' });
 });
 

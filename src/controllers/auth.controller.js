@@ -1,4 +1,5 @@
 const createHttpError = require('http-errors');
+const RefreshToken = require('../db/models/refreshTokens');
 const User = require('../db/models/user');
 const AuthService = require('../services/auth.service');
 
@@ -37,4 +38,14 @@ module.exports.login = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+module.exports.refresh = async (req, res, next) => {
+  const {
+    refreshTokenInstance, // отвалидированный, не протухший екземпляр
+  } = req;
+
+  const sessionData = await AuthService.refreshSession(refreshTokenInstance);
+
+  res.status(200).send({ data: sessionData });
 };
