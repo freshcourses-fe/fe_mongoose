@@ -5,6 +5,7 @@ const CONSTANTS = {
   JWT_ACCESS_EXPIRATION_TIME: '1m',
   JWT_REFRESH_SECRET: 'fbdhsb48hs7arf48ofawudwnefuewf',
   JWT_REFRESH_EXPIRATION_TIME: '14d',
+  SALT_ROUNDS: 10,
 };
 
 module.exports = CONSTANTS;

@@ -1,5 +1,5 @@
 const createHttpError = require('http-errors');
-const RefreshToken = require('../db/models/refreshTokens');
+const bcrypt = require('bcrypt');
 const User = require('../db/models/user');
 const AuthService = require('../services/auth.service');
 
@@ -29,7 +29,9 @@ module.exports.login = async (req, res, next) => {
       return next(createHttpError(401, 'Invalid data'));
     }
 
-    if (user.password !== password) {
+    const isValidPass = bcrypt.compareSync(password, user.password);
+
+    if (!isValidPass) {
       return next(createHttpError(401, 'Invalid data'));
     }
     const sessionData = await AuthService.createSession(user);
