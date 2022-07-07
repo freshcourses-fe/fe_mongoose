@@ -6,6 +6,10 @@ const CONSTANTS = {
   JWT_REFRESH_SECRET: 'fbdhsb48hs7arf48ofawudwnefuewf',
   JWT_REFRESH_EXPIRATION_TIME: '14d',
   SALT_ROUNDS: 10,
+  SOCKET_EVENTS: {
+    NEW_MESSAGE: 'newMessage',
+    NEW_MESSAGE_ERROR: 'newMessageError',
+  }
 };
 
 module.exports = CONSTANTS;
