@@ -1,13 +1,33 @@
-version: "3.7"
+version: '3.8'
 
 services:
-  server:
+  node-server:
+    # указываем если создаем контейнер с образа докерфайлу
     build:
-      context: .
+      context: . # путь к докерфайлу
+      dockerfile: Dockerfile # для кастомных файлов
     ports:
-      - "5000:5000"
+      - 5000:5000
+    environment:
+      - DB_URL=mongodb://db_mongo:27017/
+    volumes:
+      - ./:/server:ro
     depends_on:
-      - db
+      - db_mongo
+    restart: always
+    networks:
+      - backend-net
+      - frontend-net
 
-  db:
+  db_mongo:
     image: mongo
+    volumes:
+      - ~/backups/mongo:/data/db 
+    restart: always
+    networks:
+      - backend-net
+
+networks:
+  backend-net:
+    name: 'backend-my-project'
+  frontend-net:

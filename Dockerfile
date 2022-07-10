@@ -22,4 +22,4 @@ DB_NAME=test
 EXPOSE 5000
 
 # запускаем сервер
-CMD npm run start
+CMD npm run dev
